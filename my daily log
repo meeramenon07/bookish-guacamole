@@ -457,6 +457,79 @@ The solution:
 
 
 
+##Day 8 #Log 8
+#Date[09th August 2020]
+
+Todays topic
+Data Visualization with D3: Update the Height of an Element Dynamically
+
+Details
+1) Create a div for each data point in the array
+
+2) Give each div a dynamic height, using a callback function in the style() method that sets height equal to the data value
+
+Recall the format to set a style using a callback function:
+
+selection.style("cssProperty", (d) => d)
+
+Add the style() method to the code in the editor to set the height property for each element. Use a callback function to return the value of the data point with the string "px" added to it.
+
+The first div should have a height of 12 pixels.
+Passed
+The second div should have a height of 31 pixels.
+Passed
+The third div should have a height of 22 pixels.
+Passed
+The fourth div should have a height of 17 pixels.
+Passed
+The fifth div should have a height of 25 pixels.
+Passed
+The sixth div should have a height of 18 pixels.
+Passed
+The seventh div should have a height of 29 pixels.
+Passed
+The eighth div should have a height of 14 pixels.
+Passed
+The ninth div should have a height of 9 pixels.
+
+SOLUTION:
+
+```
+<style>
+  .bar {
+    width: 25px;
+    height: 100px;
+    display: inline-block;
+    background-color: blue;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    d3.select("body").selectAll("div")
+      .data(dataset)
+      .enter()
+      .append("div")
+      .attr("class", "bar")
+      // Add your code below this line
+          
+        
+        .style("height", (d)=>`${d}px`)
+
+      // Add your code above this line
+  </script>
+</body>
+```
+
+
+
+
+
+
+
+
+
 
 
 

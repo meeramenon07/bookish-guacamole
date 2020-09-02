@@ -1900,3 +1900,140 @@ SOLUTION:
 </body>
 
 ```
+
+
+
+
+
+
+
+##Day 24 #Log 24
+#Date[02nd September 2020]
+
+Today's topic:Data Visualization with D3: Use a Pre-Defined Scale to Place Elements
+
+Details
+With the scales set up, it's time to map the scatter plot again. The scales are like processing functions that turn the x and y raw data into values that fit and render correctly on the SVG canvas. They keep the data within the screen's plotting area.
+
+You set the coordinate attribute values for an SVG shape with the scaling function. This includes x and y attributes for rect or text elements, or cx and cy for circles. Here's an example:
+
+shape
+  .attr("x", (d) => xScale(d[0]))
+Scales set shape coordinate attributes to place the data points onto the SVG canvas. You don't need to apply scales when you display the actual data value, for example, in the text() method for a tooltip or label.
+
+
+
+Task:
+Use xScale and yScale to position both the circle and text shapes onto the SVG canvas. For the circles, apply the scales to set the cx and cy attributes. Give them a radius of 5 units, too.
+
+For the text elements, apply the scales to set the x and y attributes. The labels should be offset to the right of the dots. To do this, add 10 units to the x data value before passing it to the xScale.
+
+Passed
+Your code should have 10 circle elements.
+Passed
+The first circle element should have a cx value of approximately 91 and a cy value of approximately 368 after applying the scales. It should also have an r value of 5.
+Passed
+The second circle element should have a cx value of approximately 159 and a cy value of approximately 181 after applying the scales. It should also have an r value of 5.
+Passed
+The third circle element should have a cx value of approximately 340 and a cy value of approximately 329 after applying the scales. It should also have an r value of 5.
+Passed
+The fourth circle element should have a cx value of approximately 131 and a cy value of approximately 60 after applying the scales. It should also have an r value of 5.
+Passed
+The fifth circle element should have a cx value of approximately 440 and a cy value of approximately 237 after applying the scales. It should also have an r value of 5.
+Passed
+The sixth circle element should have a cx value of approximately 271 and a cy value of approximately 306 after applying the scales. It should also have an r value of 5.
+Passed
+The seventh circle element should have a cx value of approximately 361 and a cy value of approximately 351 after applying the scales. It should also have an r value of 5.
+Passed
+The eighth circle element should have a cx value of approximately 261 and a cy value of approximately 132 after applying the scales. It should also have an r value of 5.
+Passed
+The ninth circle element should have a cx value of approximately 131 and a cy value of approximately 144 after applying the scales. It should also have an r value of 5.
+Passed
+The tenth circle element should have a cx value of approximately 79 and a cy value of approximately 326 after applying the scales. It should also have an r value of 5.
+Passed
+Your code should have 10 text elements.
+Passed
+The first label should have an x value of approximately 100 and a y value of approximately 368 after applying the scales.
+Passed
+The second label should have an x value of approximately 168 and a y value of approximately 181 after applying the scales.
+Passed
+The third label should have an x value of approximately 350 and a y value of approximately 329 after applying the scales.
+Passed
+The fourth label should have an x value of approximately 141 and a y value of approximately 60 after applying the scales.
+Passed
+The fifth label should have an x value of approximately 449 and a y value of approximately 237 after applying the scales.
+Passed
+The sixth label should have an x value of approximately 280 and a y value of approximately 306 after applying the scales.
+Passed
+The seventh label should have an x value of approximately 370 and a y value of approximately 351 after applying the scales.
+Passed
+The eighth label should have an x value of approximately 270 and a y value of approximately 132 after applying the scales.
+Passed
+The ninth label should have an x value of approximately 140 and a y value of approximately 144 after applying the scales.
+Passed
+The tenth label should have an x value of approximately 88 and a y value of approximately 326 after applying the scales.
+
+
+
+SOLUTION
+```
+<body>
+  <script>
+    const dataset = [
+                  [ 34,     78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,   411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,    333 ],
+                  [ 78,    320 ],
+                  [ 21,   123 ]
+                ];
+
+    const w = 500;
+    const h = 500;
+    const padding = 60;
+
+    const xScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[0])])
+                     .range([padding, w - padding]);
+
+    const yScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[1])])
+                     .range([h - padding, padding]);
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("circle")
+       .data(dataset)
+       .enter()
+       .append("circle")
+       // Add your code below this line
+          .attr("cx", (d) => xScale(d[0]))
+          .attr("cy", (d) => yScale(d[1]))
+          .attr("r", 5);
+
+
+       // Add your code above this line
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) =>  (d[0] + ", "
+ + d[1]))
+       // Add your code below this line
+
+          .attr("x", (d) => xScale(d[0] + 10))
+          .attr("y", (d) => yScale(d[1]));
+
+       // Add your code above this line
+  </script>
+</body>
+
+```
